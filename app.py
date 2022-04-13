@@ -7,11 +7,11 @@ async def get_all_messages():
     channel = client.get_channel(466696591399714822)
     messages = {}
     count = 0
-    async for message in channel.history(limit=9999, oldest_first=True):
+    async for message in channel.history(limit=None, oldest_first=True):
         messages[count] = {
-            'contents':  message.content,
-            'author':    message.author.name,
-            'timestamp': message.created_at
+            "contents":  message.content,
+            "author":    message.author.name,
+            "timestamp": message.created_at
         }
         count += 1
     filename = "./message_dump.json"
@@ -30,4 +30,4 @@ class Bot(discord.Client):
 intents = discord.Intents.all()
 client = Bot(intents=intents)
 
-client.run(os.environ.get('BOT_TOKEN'))
+client.run(os.environ.get("BOT_TOKEN"))
